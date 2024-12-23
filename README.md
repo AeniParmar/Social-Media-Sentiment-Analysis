@@ -1,93 +1,120 @@
-_**Project Objective**_
+---
 
-The aim of this project is to detect hate speech in tweets. Specifically, a tweet is classified as containing hate speech if it exhibits a racist sentiment. The task involves building a model to classify tweets into two categories:
+# **Social Media Sentiment Analysis - README**
 
-Label '1': The tweet contains racist sentiment.
+## **Project Objective**  
+The project aims to analyze sentiment on Twitter, specifically focusing on detecting hate speech in tweets. Using natural language processing (NLP) techniques, the tweets are classified as either **racist** or **non-racist**, leveraging machine learning models trained on a labeled dataset.
 
-Label '0': The tweet does not contain racist sentiment.
+---
 
-A labeled dataset of 31,962 tweets is provided for training the model. Each record in the dataset contains:
--Tweet ID
--Label (0 or 1)
--The tweet text
+## **Dataset Information**  
+- **Source**: A dataset of 31,962 tweets labeled as racist or non-racist.  
+- **Preprocessing Steps**:  
+  - Removed Twitter handles, special characters, numbers, and punctuations.  
+  - Tokenized tweets into individual words.  
+  - Applied stemming to reduce words to their base form.  
+- **Feature Extraction**: Utilized the Bag of Words (BoW) method for transforming text data into numerical form.  
 
-**Dataset Information** :The dataset is a CSV file containing the necessary information to train and test the hate speech detection model.
+---
 
-Data preprocessing is critical to clean and prepare the tweets for analysis and model building.
+## **Technologies Used**  
+- **Programming Language**: Python  
+- **Libraries**: Pandas, NumPy, Scikit-learn, NLTK, Matplotlib, Seaborn, WordCloud  
 
-**Prerequisites**
-_Python libraries_: pandas, numpy, matplotlib, seaborn, re, string, nltk, wordcloud, sklearn
-Basic understanding of Natural Language Processing (NLP) and Machine Learning (ML).
+---
 
-**Steps Involved**
-_1. Data Loading and Inspection_
-Load the dataset using pandas.
-Inspect the dataset structure with .info() and .head() methods.
+## **Steps Involved**  
 
-_2. Data Cleaning_
-Remove Twitter handles (e.g., @user) using regex.
-Remove special characters, numbers, and punctuations.
-Remove short words with fewer than three characters.
-Tokenize and stem words using the PorterStemmer from the nltk library.
-Reconstruct cleaned tweets into sentences.
+### **1. Data Preprocessing**  
+- **Text Cleaning**: Removed unnecessary elements like Twitter handles, special characters, and numbers.  
+- **Tokenization**: Split sentences into individual words.  
+- **Stemming**: Reduced words to their root forms for consistency.  
 
-_3. Data Visualization_
-WordCloud Visualization
-Generate word clouds for:
-All cleaned tweets.
-Non-racist tweets (label 0).
-Racist tweets (label 1).
+### **2. Exploratory Data Analysis (EDA)**  
+- Generated word clouds and bar plots to visualize frequent words and hashtags.  
+- Identified common trends in tweets with racist and non-racist sentiments.  
 
-**Hashtag Analysis**
-Extract hashtags from non-racist and racist tweets.
-Identify the top 10 most frequent hashtags for each category and visualize them using bar plots.
+### **3. Feature Extraction**  
+- Used the Bag of Words (BoW) method to convert text into a numerical representation.  
 
-_4. Feature Extraction_
-Use CountVectorizer from sklearn to convert the text into a Bag of Words (BoW) representation.
-Configure CountVectorizer with:
-max_df=0.90
-min_df=2
-max_features=1000
-stop_words='english'
+### **4. Model Training**  
+- Split the dataset into training and testing sets.  
+- Trained a logistic regression model on the extracted features.  
 
-_5. Train-Test Split_
-Split the data into training and testing sets using train_test_split from sklearn:
-Test size: 25%
-Random state: 42
+### **5. Model Evaluation**  
+- Evaluated performance using accuracy and F1 score metrics.  
 
-_6. Model Training and Testing_
-Train a Logistic Regression model on the training set.
-Evaluate the model using:
-F1 Score
-Accuracy Score
+---
 
-_7. Threshold Adjustment_
-Use predicted probabilities to classify tweets.
-Experiment with different thresholds (e.g., 0.3) to optimize the model's performance.
+## **Key Functions**  
 
-**Results**
-The model performance is measured using F1 Score and Accuracy Score.
-Fine-tuning of probability thresholds can improve classification results.
+1. **`preprocess_text(text)`**:  
+   - Cleans and preprocesses raw tweet text.  
+   - Returns tokenized and stemmed words.  
 
-**Dependencies**
-Python 3.x
-pandas
-numpy
-matplotlib
-seaborn
-nltk
-sklearn
-wordcloud
+2. **`extract_features(data)`**:  
+   - Transforms preprocessed text into numerical form using the BoW model.  
 
-**Observations**
+3. **`train_model(X_train, y_train)`**:  
+   - Trains a logistic regression model on the training data.  
 
-Cleaning and preprocessing significantly impact the model's accuracy.
-Most frequent hashtags provide insights into the nature of the tweets.
-Logistic Regression performs reasonably well with BoW representation.
-Adjusting probability thresholds can affect the balance between precision and recall.
+4. **`evaluate_model(model, X_test, y_test)`**:  
+   - Tests the model on unseen data and calculates evaluation metrics.  
 
-**Notes**
+---
 
-The dataset may require further augmentation to improve model performance.
+## **Results & Observations**  
+- The logistic regression model performed well, achieving:  
+  - **Accuracy**: High classification accuracy on the test set.  
+  - **F1 Score**: Demonstrated balanced precision and recall.  
+- Visualization through word clouds highlighted dominant words in both racist and non-racist categories.  
 
-Consider exploring other feature extraction methods like TF-IDF or word embeddings.
+---
+
+## **Future Enhancements**  
+1. **Advanced NLP Techniques**:  
+   - Use transformer-based models like BERT for improved accuracy.  
+   - Implement word embeddings (e.g., Word2Vec or GloVe) for richer feature extraction.  
+
+2. **Enhanced Dataset**:  
+   - Expand the dataset to include tweets with mixed sentiments.  
+   - Include multilingual tweets for broader applicability.  
+
+3. **Dashboard Integration**:  
+   - Create an interactive dashboard to visualize sentiment trends in real-time.  
+
+---
+
+## **Dependencies**  
+- Python 3.x  
+- Pandas, NumPy  
+- Scikit-learn  
+- NLTK  
+- Matplotlib, Seaborn  
+- WordCloud  
+
+---
+
+## **How to Run**  
+
+### **Setup**  
+1. Install necessary libraries:  
+   ```bash  
+   pip install pandas numpy scikit-learn nltk matplotlib seaborn wordcloud  
+   ```  
+2. Place the dataset (`tweets.csv`) in the working directory.  
+
+### **Run the Code**  
+1. Execute the script for preprocessing, feature extraction, and model training:  
+   ```bash  
+   python sentiment_analysis.py  
+   ```  
+2. View results in the terminal or saved output files.  
+
+---
+
+## **Contributors**  
+- **Aeni Parmar**  
+  Data Analyst | [GitHub](https://github.com/AeniParmar)  
+
+---
